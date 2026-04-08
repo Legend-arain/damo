@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindForge - Weaponize Human Psychology</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 30%, #2a1a1a 60%, #3a2a2a 100%);
+            color: #e0e0e0;
+            overflow-x: hidden;
+            cursor: none;
+            line-height: 1.8;
+        }
+
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #ff6b6b, #cc3333, #aa2222);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 20px rgba(255,107,107,0.6);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            border-bottom: 3px solid #ff6b6b;
+            box-shadow: 0 5px 30px rgba(255,107,107,0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .logo {
+            font-family: 'Creepster', cursive;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 4px;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: #000;
+            border: 2px solid #ff6b6b;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(255,107,107,0.4);
+            font-family: 'Orbitron', monospace;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255,107,107,0.6);
+            background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(255,107,107,0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease infinite;
+            font-family: 'Orbitron', monospace;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+            max-width: 900px;
+            opacity: 0.95;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 120px 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .card {
+            background: linear-gradient(145deg, rgba(20,20,20,0.9), rgba(40,40,40,0.7));
+            border: 2px solid transparent;
+            border-radius: 25px;
+            padding: 3rem;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #ff6b6b);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: #ff6b6b;
+            box-shadow: 0 30px 60px rgba(255,107,107,0.3);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .warning {
+            background: linear-gradient(145deg, rgba(255,107,107,0.2), rgba(204,51,51,0.1));
+            border: 2px solid rgba(255,107,107,0.4);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .progress-container {
+            background: rgba(0,0,0,0.6);
+            height: 8px;
+            border-radius: 5px;
+            margin: 3rem 0;
+            overflow: hidden;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            width: 0%;
+            transition: width 0.8s ease;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .contact-card {
+            background: linear-gradient(145deg, rgba(20,20,20,0.9), rgba(40,40,40,0.7));
+            border: 2px solid rgba(255,107,107,0.3);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-card:hover {
+            border-color: #4ecdc4;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(78,205,196,0.3);
+        }
+
+        .buy-section {
+            background: linear-gradient(145deg, rgba(255,107,107,0.15), rgba(78,205,196,0.1));
+            border: 3px solid transparent;
+            border-radius: 30px;
+            padding: 4rem;
+            max-width: 900px;
+            margin: 4rem auto;
+            text-align: center;
+            background-clip: padding-box;
+        }
+
+        .buy-section:hover {
+            border-image: linear-gradient(45deg, #ff6b6b, #4ecdc4) 1;
+        }
+
+        footer {
+            background: linear-gradient(180deg, rgba(0,0,0,0.95), rgba(20,20,20,0.9));
+            text-align: center;
+            padding: 4rem 3rem;
+            border-top: 4px solid #ff6b6b;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            h2 { font-size: 2.5rem; }
+            .cards-grid, .contact-grid { grid-template-columns: 1fr; }
+            section { padding: 80px 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor" id="cursor"></div>
+    
+    <header>
+        <nav>
+            <div class="logo">🧠 MIND FORGE</div>
+            <button class="cta-button" onclick="scrollToSection('buy')">SECURE ACCESS NOW</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>WEAPONIZE HUMAN PSYCHOLOGY</h1>
+        <p>Unlock the forbidden psychological triggers that control 95% of human decisions. These battle-tested techniques have been used by elite negotiators, top salespeople, and master influencers for decades. Most people live their entire lives as puppets to these invisible forces without ever knowing they exist.</p>
+        <button class="cta-button" style="font-size: 1.5rem; padding: 20px 60px;" onclick="scrollToSection('buy')">MASTERMIND ACCESS</button>
+    </section>
+
+    <section id="psychology">
+        <h2>CORE PSYCHOLOGICAL WEAPONS</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>🔥 SCARCITY + URGENCY MATRIX</h3>
+                <p>Humans are hardwired to act when they fear loss. This dual-trigger system combines artificial scarcity with time pressure to bypass rational decision-making completely. Studies show conversion rates increase by 300-500% when both triggers fire simultaneously.</p>
+                <p><strong>Mechanism:</strong> Activates the amygdala (fear center) + prefrontal cortex suppression. Creates "must-act-now" compulsion that overrides price resistance.</p>
+                <p><strong>Real World:</strong> Used by Apple, Amazon, and every major Black Friday sale ever.</p>
+                <div class="warning">⚠️ Creates compulsive behavior patterns. Use with extreme caution on repeat customers.</div>
+            </div>
+            
+            <div class="card">
+                <h3>🧠 AUTHORITY HALO + SOCIAL PROOF</h3>
+                <p>The human brain defaults to obedience when encountering perceived authority. Combine this with social validation and you create unbreakable compliance. Milgram's obedience experiments proved 65% of people will obey authority even against their moral compass.</p>
+                <p><strong>Mechanism:</strong> Triggers mirror neurons + deference reflex. Bypasses critical thinking entirely.</p>
+                <p><strong>Application:</strong> "9,847 people just enrolled" + expert testimonials = instant trust transfer.</p>
+                <div class="warning">⚠️ Can create blind obedience. Test compliance levels gradually.</div>
+            </div>
+            
+            <div class="card">
+                <h3>💎 LOSS AVERSION AMPLIFICATION</h3>
+                <p>Kahneman & Tversky discovered people feel loss 2.6x more intensely than equivalent gain. This asymmetry can be weaponized by reframing every offer as "what they'll lose if they don't act." Turns objections into desperate closes.</p>
+                <p><strong>Mechanism:</strong> Hyperactivates the brain's pain centers while suppressing pleasure anticipation.</p>
+                <p><strong>Phrase Example:</strong> "You'll miss your only chance at 3x growth if you wait."</p>
+                <div class="warning">⚠️ Generates extreme FOMO. Can cause decision paralysis in weak minds.</div>
+            </div>
+            
+            <div class="card">
+                <h3>⚡ ANCHORING + ARBITRARY VALUE</h3>
+                <p>The first number presented becomes the mental benchmark for ALL future negotiations. Set ridiculously high anchors then "compromise" to your real price. Research shows first offers influence final agreements by 65%+.</p>
+                <p><strong>Mechanism:</strong> Creates cognitive bias toward the initial reference point. Makes your real offer seem like a massive discount.</p>
+                <p><strong>Example:</strong> "$50,000 solution... but for you, just $5,000."</p>
+                <div class="warning">⚠️ Permanently warps price perception. Use strategically.</div>
+            </div>
+
+            <div class="card">
+                <h3>🎭 RECIPROCITY OBLIGATION LOOP</h3>
+                <p>Cialdini's Principle #1: Humans feel compelled to repay favors. Give something first (free value, bonuses, gifts) then extract massive compliance. This creates a psychological debt that must be repaid - usually at 10x value.</p>
+                <p><strong>Mechanism:</strong> Activates guilt centers + social exchange theory. Impossible to resist.</p>
+                <p><strong>Proven:</strong> Free samples increase sales by 400% (supermarket studies).</p>
+                <div class="warning">⚠️ Creates obligation addiction. Monitor reciprocity fatigue.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-upgrade" style="background: linear-gradient(180deg, rgba(20,20,20,0.9), rgba(40,40,40,0.8));">
+        <h2>WHY 99% FAIL MISERABLY</h2>
+        <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.4rem; margin-bottom: 2.5rem; opacity: 0.95; line-height: 1.9;">
+                99% of people in sales, business, and influence fail because they fight against human psychology instead of weaponizing it. They use logic when people buy on emotion. They negotiate price when people respond to psychological triggers.
+            </p>
+            <p style="font-size: 1.3rem; margin-bottom: 3rem; opacity: 0.9;">
+                The top 1% understand the human brain operates on predictable patterns that can be hacked, reverse-engineered, and controlled with surgical precision.
+            </p>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress"></div>
+            </div>
+            <p style="font-size: 1.4rem; margin-top: 1.5rem; font-weight: 700;">
+                <strong>Your Current Brain Usage: <span id="perf">13%</span></strong>
+            </p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>ELITE SUPPORT SYSTEM</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <h3>📱 DIRECT PHONE</h3>
+                <p><strong>+1 (555) 777-1337</strong></p>
+                <p>Mon-Fri: 8AM-10PM EST</p>
+                <p>24/7 Emergency Line</p>
+                <p>Elite clients only</p>
+            </div>
+            <div class="contact-card">
+                <h3>✉️ PRIORITY EMAIL</h3>
+                <p><strong>elite@mindforge.ai</strong></p>
+                <p>VIP Response: Under 30 minutes</p>
+                <p>Personal strategist assigned</p>
+            </div>
+            <div class="contact-card">
+                <h3>💬 LIVE MENTOR CHAT</h3>
+                <p>24/7 Human Coaches</p>
+                <p>Average response: 45 seconds</p>
+                <p>Unlimited sessions</p>
+            </div>
+            <div class="contact-card">
+                <h3>🏛️ HEADQUARTERS</h3>
+                <p>MindForge Global</p>
+                <p>New York, NY 10001</p>
+                <p>Private consultations available</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="buy">
+        <h2>COMPLETE MIND FORGE SYSTEM</h2>
+        <div class="buy-section">
+            <h3 style="font-size: 3rem; margin-bottom: 2rem; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">EXCLUSIVE LIFETIME ACCESS</h3>
+            <p style="font-size: 1.4rem; margin-bottom: 3rem; opacity: 0.95;">Full psychological arsenal • Video breakdowns • Live
